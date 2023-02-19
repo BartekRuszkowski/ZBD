@@ -80,8 +80,10 @@ CREATE_MECZ = """
 CREATE TABLE IF NOT EXISTS MECZ
 (id_meczu INTEGER PRIMARY KEY,
 wynik TEXT NOT NULL,
-FOREIGN KEY(id_druzyna_szczebel_1) REFERENCES SEZON_LIGA(id_druzyna_szczebel),
-FOREIGN KEY(id_druzyna_szczebel_2) REFERENCES DRUZYNA(id_druzyna_szczebel));
+id_druzyna_szczebel_1 INTEGER NOT NULL,
+id_druzyna_szczebel_2 INTEGER NOT NULL,
+FOREIGN KEY(id_druzyna_szczebel_1) REFERENCES DRUZYNA_SZCZEBEL(id_druzyna_szczebel),
+FOREIGN KEY(id_druzyna_szczebel_2) REFERENCES DRUZYNA_SZCZEBEL(id_druzyna_szczebel));
 """
 
 CREATE_SUGESTIE = """
@@ -106,6 +108,13 @@ INSERT_KOLEJKA_ROZGRYWEK = "INSERT INTO KOLEJKA_ROZGRYWEK (start_kolejki, koniec
 
 INSERT_DRUZYNA = "INSERT INTO DRUZYNA (nazwa_druzyny) VALUES (?);"
 
+INSERT_SEZON_LIGA = "INSERT INTO SEZON_LIGA (id_sezonu, id_ligi, id_szczebla) VALUES (?, ?, ?);"
+
+INSERT_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzyny) VALUES (?, ?);"
+
+INSERT_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
+
+INSERT_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?)"
 ##
 SELECT_GRACZ = "SELECT * FROM GRACZ;"
 SELECT_SZUKANE_GRACZE = "SELECT * FROM GRACZ WHERE imie = ? OR nazwisko = ? OR rok_urodzenia = ?"
@@ -134,8 +143,16 @@ DELETE_DRUZYNA = "DELETE FROM DRUZYNA WHERE (nazwa_druzyny = ?);"
 
 DELETE_GRACZ = "DELETE FROM GRACZ WHERE (imie = ?) AND (nazwisko = ?) AND (rok_urodzenia = ?);"
 
+DELETE_SEZON_LIGA = "INSERT INTO SEZON_LIGA (id_sezonu, id_ligi, id_szczebla) VALUES (?, ?, ?);"
 
-lista_tabel = [CREATE_GRACZ, CREATE_GRACZ_DRUZYNA, CREATE_TABLE_LIGA, CREATE_TABLE_szczebel, CREATE_TABLE_SEZON_LIGA, KOLEJKA_ROZGRYWEK, CREATE_DRUZYNA, CREATE_DRUZYNA_SZCZEBEL, CREATE_TABLE_SEZON, CREATE_SUGESTIE]
+DELETE_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzyny) VALUES (?, ?);"
+
+DELETE_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
+
+DELETE_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?)"
+
+
+lista_tabel = [CREATE_GRACZ, CREATE_GRACZ_DRUZYNA, CREATE_TABLE_LIGA, CREATE_TABLE_szczebel, CREATE_TABLE_SEZON_LIGA, KOLEJKA_ROZGRYWEK, CREATE_DRUZYNA, CREATE_DRUZYNA_SZCZEBEL, CREATE_TABLE_SEZON, CREATE_SUGESTIE, CREATE_MECZ]
 
 def connect():
     return sqlite3.connect("database.db")
@@ -249,3 +266,28 @@ def delete_druzyna(connection, nazwa_druzyny):
 def insert_sugestia(connection, sugestia):
     with connection:
         connection.execute(INSERT_SUGESTIA, (sugestia,))
+
+
+# INSERT_SEZON_LIGA = "INSERT INTO SEZON_LIGA (id_sezonu, id_ligi, id_szczebla) VALUES (?, ?, ?);"
+
+# INSERT_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzyny) VALUES (?, ?);"
+
+# INSERT_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
+
+# INSERT_GRACZ_DRUZYNA = "INSERT INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?)"
+
+def insert_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla):
+    with connection:
+        connection.execute(INSERT_SEZON_LIGA, (id_sezonu, id_ligi, id_szczebla))
+
+def insert_druzyna_szczebel(connection, id_sezon_liga, id_druzyny):
+    with connection:
+        connection.execute(INSERT_DRUZYNA_SZCZEBEL, (id_sezon_liga, id_druzyny))
+
+def insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2):
+    with connection:
+        connection.execute(INSERT_MECZ, (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2))
+
+def insert_gracz_druzyna(connection, id_gracza):
+    with connection:
+        connection.execute(INSERT_GRACZ_DRUZYNA, (id_gracza,))
