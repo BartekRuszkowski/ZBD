@@ -309,3 +309,23 @@ def delete_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
 def delete_gracz_druzyna(connection, id_gracza):
     with connection:
         connection.execute(DELETE_GRACZ_DRUZYNA, (id_gracza,))
+
+########################################################3 OLEJNIK
+SELECT_GRACZ_ID = "SELECT * FROM GRACZ WHERE id_gracza = ?;"
+def select_gracz_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_GRACZ_ID, (id,)).fetchone()
+SELECT_GRACZ_IDX = "UPDATE GRACZ set imie = ?, nazwisko = ?, rok_urodzenia = ? where id_gracza = ?;"    
+def update_gracz_id(connection, imie, nazwisko, rok, id):
+    with connection:
+        connection.execute(SELECT_GRACZ_IDX, (imie, nazwisko, rok, id))
+
+
+SELECT_SEZON_ID = "SELECT * FROM SEZON WHERE id_sezonu = ?;"
+def select_sezon_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_SEZON_ID, (id,)).fetchone()
+UPDATE_SEZON_IDX = "UPDATE SEZON set rok = ?, poczatek_sezonu = ?, koniec_sezonu = ? where id_sezonu = ?;"
+def update_sezon_id(connection, rok, paczatek, koniec, id):
+    with connection:
+        connection.execute(UPDATE_SEZON_IDX, (rok, paczatek, koniec, id))

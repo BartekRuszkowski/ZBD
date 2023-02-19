@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>50</y>
+      <y>40</y>
       <width>151</width>
       <height>61</height>
      </rect>
@@ -32,7 +32,7 @@
      <rect>
       <x>100</x>
       <y>270</y>
-      <width>191</width>
+      <width>201</width>
       <height>81</height>
      </rect>
     </property>
@@ -78,6 +78,71 @@
     <property name="text">
      <string>WYŚWIETLA DANE</string>
     </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>360</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Co chcesz zmienic ?</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>GRACZ</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>SEZON</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>LIGA</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>SZCZEBEL_ROZGRYWEK</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>SEZON_LIGA</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>KOLEJKA_ROZGRYWEK</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>DRUZYNA</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>DRUZYNA_SZCZEBEL</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>GRACZ_DRUZYNA</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>MECZ</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

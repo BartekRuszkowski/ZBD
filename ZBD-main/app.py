@@ -39,6 +39,7 @@ class MyGui(QMainWindow):
         self.pushButton.clicked.connect(self.admin_insert)
         self.pushButton_2.clicked.connect(self.admin_delete)
         self.pushButton_4.clicked.connect(self.admin_wyswietl)
+        self.pushButton_3.clicked.connect(self.admin_update)
         #### ZMIANY
         # self.pushButton.clicked.connect(self.insert_gracz)
         # self.pushButton_2.clicked.connect(self.insert_sezon)
@@ -105,7 +106,7 @@ class MyGui(QMainWindow):
     def insert_sezon_liga_add(self):
         id_sezonu = self.lineEdit.text()
         id_ligi = self.lineEdit_2.text()
-        id_szczebla = int(self.lineEdit_3.text())
+        id_szczebla = self.lineEdit_3.text()
         try:
             database.insert_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla)
         except sqlite3.IntegrityError as er:
@@ -583,6 +584,66 @@ class MyGui(QMainWindow):
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
             self.label.adjustSize()
+
+
+    
+    ############################################33 OLEJNIK        
+    def admin_update(self):
+        modyfikowane = self.comboBox.currentText()
+        if modyfikowane == "GRACZ":
+            #uic.loadUi("admin_update_gracz.ui", self)
+            self.admin_update_gracz()
+        elif modyfikowane == "SEZON":
+            self.admin_update_sezon()
+        elif modyfikowane == "LIGA":
+            self.admin_update_liga()
+        else:
+            print("wybierz co chcesz modyfkiowac")
+
+    def admin_update_gracz(self):
+        uic.loadUi("ui/admin_update_gracz.ui", self)
+        self.pushButton.clicked.connect(self.print_gracze_id)
+        self.pushButton_2.clicked.connect(self.update_gracz)
+    def update_gracz(self):
+        tekst = self.lineEdit.text()
+        nowe_imie = self.lineEdit_2.text()
+        nowe_nazwisko = self.lineEdit_3.text()
+        nowy_rok = self.lineEdit_4.text()
+        database.update_gracz_id(connection, nowe_imie, nowe_nazwisko, nowy_rok, tekst)
+    def print_gracze_id(self): # printuje gracza o ID podanym w lineEdit
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_GRACZA   |    IMIE    |    NAZWISKO    |    ROK_URODZENIA\n")
+        gracz = database.select_gracz_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,gracz)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_GRACZA")
+
+    def admin_update_sezon(self):
+        uic.loadUi("ui/admin_update_sezon.ui", self)
+        self.pushButton.clicked.connect(self.print_sezon_id)
+        self.pushButton_2.clicked.connect(self.update_sezon)
+    def update_sezon(self):
+        tekst = self.lineEdit.text()
+        nowe_rok = self.lineEdit_2.text()
+        nowe_paczatek = self.lineEdit_3.text()
+        nowy_koniec = self.lineEdit_4.text()
+        database.update_sezon_id(connection, nowe_rok, nowe_paczatek, nowy_koniec, tekst)
+    def print_sezon_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_SEZONU   |    ROK    |    POCZATEK    |    KONIEC\n")
+        sezon = database.select_sezon_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,sezon)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_SEZONU")
+
+    def admin_update_liga(self):
+        uic.loadUi("ui/admin_update_liga.ui", self)
+        self.pushButton.clicked.connect(self.print_sezon_id)
+        self.pushButton_2.clicked.connect(self.update_sezon)
 
 def main():
     global connection
