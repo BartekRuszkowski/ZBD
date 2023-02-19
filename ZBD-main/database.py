@@ -12,12 +12,13 @@ rok_urodzenia integer NOT NULL);
 """
 
 
-##### tutaj brakuje foreign key
 CREATE_GRACZ_DRUZYNA = """
 CREATE TABLE IF NOT EXISTS GRACZ_DRUZYNA
 (id_gracz_druzyna INTEGER PRIMARY KEY,
 id_gracza INTEGER NOT NULL,
-FOREIGN KEY(id_gracza) REFERENCES GRACZ(id_gracza)
+id_druzyna_szczebel INTEGER NOT NULL,
+FOREIGN KEY(id_gracza) REFERENCES GRACZ(id_gracza),
+FOREIGN KEY(id_druzyna_szczebel) REFERENCES DRUZYNA_SZCZEBEL(id_druzyna_szczebel)
 );
 """
 
@@ -114,7 +115,7 @@ INSERT_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzy
 
 INSERT_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
 
-INSERT_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?);"
+INSERT_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza, id_druzyna_szczebel) VALUES (?, ?);"
 ##
 SELECT_GRACZ = "SELECT * FROM GRACZ;"
 SELECT_SZUKANE_GRACZE = "SELECT * FROM GRACZ WHERE imie = ? OR nazwisko = ? OR rok_urodzenia = ?"
@@ -149,7 +150,7 @@ DELETE_DRUZYNA_SZCZEBEL = "DELETE FROM DRUZYNA_SZCZEBEL WHERE (id_sezon_liga = ?
 
 DELETE_MECZ = "DELETE FROM MECZ WHERE (wynik = ?) AND (id_druzyna_szczebel_1 = ?) AND (id_druzyna_szczebel_2 = ?);"
 
-DELETE_GRACZ_DRUZYNA = "DELETE FROM GRACZ_DRUZYNA  WHERE (id_gracza = ?);"
+DELETE_GRACZ_DRUZYNA = "DELETE FROM GRACZ_DRUZYNA  WHERE (id_gracza = ?) AND (id_druzyna_szczebel = ?);"
 
 
 lista_tabel = [CREATE_GRACZ, CREATE_GRACZ_DRUZYNA, CREATE_TABLE_LIGA, CREATE_TABLE_szczebel, CREATE_TABLE_SEZON_LIGA, KOLEJKA_ROZGRYWEK, CREATE_DRUZYNA, CREATE_DRUZYNA_SZCZEBEL, CREATE_TABLE_SEZON, CREATE_SUGESTIE, CREATE_MECZ]
@@ -288,9 +289,9 @@ def insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
     with connection:
         connection.execute(INSERT_MECZ, (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2))
 
-def insert_gracz_druzyna(connection, id_gracza):
+def insert_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel):
     with connection:
-        connection.execute(INSERT_GRACZ_DRUZYNA, (id_gracza,))
+        connection.execute(INSERT_GRACZ_DRUZYNA, (id_gracza,id_druzyna_szczebel))
 
 ########################################################################33
 
@@ -306,9 +307,9 @@ def delete_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
     with connection:
         connection.execute(DELETE_MECZ, (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2))
 
-def delete_gracz_druzyna(connection, id_gracza):
+def delete_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel):
     with connection:
-        connection.execute(DELETE_GRACZ_DRUZYNA, (id_gracza,))
+        connection.execute(DELETE_GRACZ_DRUZYNA, (id_gracza,id_druzyna_szczebel))
 
 ########################################################3 OLEJNIK
 SELECT_GRACZ_ID = "SELECT * FROM GRACZ WHERE id_gracza = ?;"
@@ -329,3 +330,113 @@ UPDATE_SEZON_IDX = "UPDATE SEZON set rok = ?, poczatek_sezonu = ?, koniec_sezonu
 def update_sezon_id(connection, rok, paczatek, koniec, id):
     with connection:
         connection.execute(UPDATE_SEZON_IDX, (rok, paczatek, koniec, id))
+
+
+
+
+
+# DELETE_SEZON = "DELETE FROM SEZON WHERE (rok = ?) AND (poczatek_sezonu = ?) AND (koniec_sezonu = ?);"
+
+# DELETE_LIGA = "DELETE FROM LIGA WHERE nazwa = ?;"
+
+# DELETE_SZCZEBEL = "DELETE FROM SZCZEBEL_ROZGRYWEK WHERE nazwa_szczebla = ?;"
+
+# DELETE_KOLEJKA_ROZGRYWEK = "DELETE FROM KOLEJKA_ROZGRYWEK WHERE (start_kolejki = ?) AND (koniec_kolejki = ?) AND (id_sezon_liga = ?);"
+
+# DELETE_DRUZYNA = "DELETE FROM DRUZYNA WHERE (nazwa_druzyny = ?);"
+
+# DELETE_GRACZ = "DELETE FROM GRACZ WHERE (imie = ?) AND (nazwisko = ?) AND (rok_urodzenia = ?);"
+
+# DELETE_SEZON_LIGA = "DELETE FROM SEZON_LIGA  WHERE (id_sezonu = ?) AND (id_ligi = ?) AND (id_szczebla = ?);"
+
+# DELETE_DRUZYNA_SZCZEBEL = "DELETE FROM DRUZYNA_SZCZEBEL WHERE (id_sezon_liga = ?) AND (id_druzyny = ?);"
+
+# DELETE_MECZ = "DELETE FROM MECZ WHERE (wynik = ?) AND (id_druzyna_szczebel_1 = ?) AND (id_druzyna_szczebel_2 = ?);"
+
+# DELETE_GRACZ_DRUZYNA = "DELETE FROM GRACZ_DRUZYNA  WHERE (id_gracza = ?);"
+###############################################################################3
+SELECT_SEZON_LIGA_ID = "SELECT * FROM SEZON_LIGA WHERE id_sezon_liga = ?;"
+def select_sezon_liga_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_SEZON_LIGA_ID, (id,)).fetchone()
+UPDATE_SEZON_LIGA_IDX = "UPDATE SEZON_LIGA set id_sezonu = ?, id_ligi = ?, id_szczebla = ? where id_sezon_liga = ?;"
+def update_sezon_liga_id(connection, id_sezonu, id_ligi, id_szczebla, id):
+    with connection:
+        connection.execute(UPDATE_SEZON_LIGA_IDX, (id_sezonu, id_ligi, id_szczebla, id))
+
+
+
+SELECT_KOLEJKA_ROZGRYWEK_ID = "SELECT * FROM KOLEJKA_ROZGRYWEK WHERE id_kolejki = ?;"
+def select_kolejka_rozgrywek_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_KOLEJKA_ROZGRYWEK_ID, (id,)).fetchone()
+UPDATE_KOLEJKA_ROZGRYWEK_IDX = "UPDATE KOLEJKA_ROZGRYWEK set start_kolejki = ?, koniec_kolejki = ?, id_sezon_liga = ? where id_kolejki = ?;"
+def update_kolejka_rozgrywek_id(connection, start_kolejki , koniec_kolejki, id_sezon_liga , id):
+    with connection:
+        connection.execute(UPDATE_KOLEJKA_ROZGRYWEK_IDX, (start_kolejki , koniec_kolejki, id_sezon_liga , id))
+
+
+SELECT_DRUZYNA_ID = "SELECT * FROM DRUZYNA WHERE id_druzyny = ?;"
+def select_druzyna_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_DRUZYNA_ID, (id,)).fetchone()
+UPDATE_DRUZYNA_IDX = "UPDATE DRUZYNA set nazwa_druzyny = ? where id_druzyny = ?;"
+def update_druzyna_id(connection, nazwa_druzyny, id):
+    with connection:
+        connection.execute(UPDATE_DRUZYNA_IDX, (nazwa_druzyny, id))
+
+
+        
+SELECT_DRUZYNA_SZCZEBEL_ID = "SELECT * FROM DRUZYNA_SZCZEBEL WHERE id_druzyna_szczebel = ?;"
+def select_druzyna_szczebel_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_DRUZYNA_SZCZEBEL_ID, (id,)).fetchone()
+UPDATE_DRUZYNA_SZCZEBEL_IDX = "UPDATE DRUZYNA_SZCZEBEL set id_sezon_liga = ?, id_druzyny = ? WHERE id_druzyna_szczebel = ?;"
+def update_druzyna_szczebel_id(connection, id_sezon_liga, id_druzyny, id):
+    with connection:
+        connection.execute(UPDATE_DRUZYNA_SZCZEBEL_IDX, (id_sezon_liga, id_druzyny, id))
+
+
+##############################################################################################
+
+SELECT_LIGA_ID = "SELECT * FROM LIGA WHERE id_ligi = ?;"
+def select_liga_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_LIGA_ID, (id,)).fetchone()
+
+UPDATE_LIGA_IDX = "UPDATE LIGA set nazwa = ? where id_ligi = ?;"
+def update_liga_id(connection, nazwa, id):
+    with connection:
+        connection.execute(UPDATE_LIGA_IDX, (nazwa, id))
+
+
+SELECT_SZCZEBEL_ID = "SELECT * FROM SZCZEBEL_ROZGRYWEK WHERE id_szczebla = ?;"
+UPDATE_SZCZEBEL_IDX = "UPDATE SZCZEBEL_ROZGRYWEK set nazwa_szczebla = ? where id_szczebla = ?;"
+def select_szczebel_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_SZCZEBEL_ID, (id,)).fetchone()
+    
+def update_szczebel_id(connection, nazwa, id):
+    with connection:
+        connection.execute(UPDATE_SZCZEBEL_IDX, (nazwa, id))
+
+SELECT_GRACZDRUZYNA_ID = "SELECT * FROM GRACZ_DRUZYNA WHERE id_gracz_druzyna = ?;"
+UPDATE_GRACZDRUZYNA_IDX = "UPDATE GRACZ_DRUZYNA set id_gracza = ?, id_druzyna_szczebel = ? where id_gracz_druzyna = ?;"
+def select_graczdruzyna_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_GRACZDRUZYNA_ID, (id,)).fetchone()
+    
+def update_graczdruzyna_id(connection, id_gracz, id_druzyna_szczebel, id):
+    with connection:
+        connection.execute(UPDATE_GRACZDRUZYNA_IDX, (id_gracz, id_druzyna_szczebel, id))
+
+
+SELECT_MECZ_ID = "SELECT * FROM MECZ WHERE id_meczu = ?;"
+UPDATE_MECZ_IDX = "UPDATE MECZ set wynik = ?, id_druzyna_szczebel_1 = ?, id_druzyna_szczebel_2 = ? where id_meczu = ?;"
+def select_mecz_id_admin(connection, id):
+    with connection:
+        return connection.execute(SELECT_MECZ_ID, (id,)).fetchone()
+    
+def update_mecz_id(connection, wynik, id1, id2, id):
+    with connection:
+        connection.execute(UPDATE_MECZ_IDX, (wynik, id1, id2, id))

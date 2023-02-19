@@ -17,14 +17,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>10</y>
+      <x>470</x>
+      <y>320</y>
       <width>361</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>MODYFIIKOWANIE DANYCH GRACZE</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -153,6 +153,32 @@
     </property>
     <property name="text">
      <string>UPDATE</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>10</y>
+      <width>361</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>MODYFIIKOWANIE DANYCH GRACZE</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>460</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>BACK</string>
     </property>
    </widget>
   </widget>

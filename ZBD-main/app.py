@@ -109,6 +109,8 @@ class MyGui(QMainWindow):
         id_szczebla = self.lineEdit_3.text()
         try:
             database.insert_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -123,6 +125,8 @@ class MyGui(QMainWindow):
         id_druzyny = self.lineEdit_2.text()
         try:
             database.insert_druzyna_szczebel(connection, id_sezon_liga, id_druzyny)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -134,8 +138,11 @@ class MyGui(QMainWindow):
         self.pushButton_2.clicked.connect(self.admin_insert)
     def insert_gracz_druzyna_add(self):
         id_gracza = self.lineEdit.text()
+        id_druzyna_szczebel = self.lineEdit_2.text()
         try:
-            database.insert_gracz_druzyna(connection, id_gracza)
+            database.insert_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -152,6 +159,8 @@ class MyGui(QMainWindow):
         id_druzyna_szczebel_2 = self.lineEdit.text()
         try:
             database.insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -170,6 +179,8 @@ class MyGui(QMainWindow):
         rok_urodzenia = int(self.lineEdit_3.text())
         try:
             database.add_gracz(connection, imie, nazwisko, rok_urodzenia)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -187,6 +198,8 @@ class MyGui(QMainWindow):
         koniec_sezonu = self.lineEdit_3.text()
         try:
             database.add_sezon(connection, rok, poczatek_sezonu, koniec_sezonu)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -203,6 +216,8 @@ class MyGui(QMainWindow):
         nazwa = self.lineEdit.text()
         try:
             database.add_liga(connection, nazwa)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -218,6 +233,8 @@ class MyGui(QMainWindow):
         nazwa_szczebla = self.lineEdit.text()
         try:
             database.add_szczebel(connection, nazwa_szczebla)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -234,6 +251,8 @@ class MyGui(QMainWindow):
         id_sezon_liga = int(self.lineEdit_3.text())
         try:
             database.add_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -248,6 +267,8 @@ class MyGui(QMainWindow):
         nazwa_druzyna = self.lineEdit.text()
         try:
             database.add_druzyna(connection, nazwa_druzyna)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -442,6 +463,8 @@ class MyGui(QMainWindow):
         id_szczebla = int(self.lineEdit_3.text())
         try:
             database.delete_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -467,8 +490,11 @@ class MyGui(QMainWindow):
         self.pushButton_2.clicked.connect(self.admin_delete)
     def delete_gracz_druzyna_add(self):
         id_gracza = self.lineEdit.text()
+        id_druzyna_szczebel = self.lineEdit_2.text()
         try:
-            database.delete_gracz_druzyna(connection, id_gracza)
+            database.delete_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -485,6 +511,8 @@ class MyGui(QMainWindow):
         id_druzyna_szczebel_2 = self.lineEdit.text()
         try:
             database.delete_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -503,6 +531,8 @@ class MyGui(QMainWindow):
         rok_urodzenia = int(self.lineEdit_3.text())
         try:
             database.delete_gracz(connection, imie, nazwisko, rok_urodzenia)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -519,6 +549,8 @@ class MyGui(QMainWindow):
         koniec_sezonu = self.lineEdit_3.text()
         try:
             database.delete_sezon(connection, rok, poczatek_sezonu, koniec_sezonu)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -533,6 +565,8 @@ class MyGui(QMainWindow):
         nazwa = self.lineEdit.text()
         try:
             database.delete_liga(connection, nazwa)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -549,6 +583,8 @@ class MyGui(QMainWindow):
         
         try:
             database.delete_szczebel(connection, nazwa_szczebla)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -565,6 +601,8 @@ class MyGui(QMainWindow):
         id_sezon_liga = int(self.lineEdit_3.text())
         try:
             database.delete_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -580,6 +618,8 @@ class MyGui(QMainWindow):
         nazwa_druzyna = self.lineEdit.text()
         try:
             database.delete_druzyna(connection, nazwa_druzyna)
+            self.label.setText(" ")
+            self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -595,8 +635,22 @@ class MyGui(QMainWindow):
             self.admin_update_gracz()
         elif modyfikowane == "SEZON":
             self.admin_update_sezon()
+        elif modyfikowane == "SEZON_LIGA":
+            self.admin_update_sezon_liga()
+        elif modyfikowane == "KOLEJKA_ROZGRYWEK":
+            self.admin_update_kolejka_rozgrywek()
+        elif modyfikowane == "DRUZYNA":
+            self.admin_update_druzyna()
+        elif modyfikowane == "DRUZYNA_SZCZEBEL":
+            self.admin_update_druzyna_szczebel()
         elif modyfikowane == "LIGA":
             self.admin_update_liga()
+        elif modyfikowane == "SZCZEBEL_ROZGRYWEK":
+            self.admin_update_szczebel()
+        elif modyfikowane == "GRACZ_DRUZYNA":
+            self.admin_update_graczdruzyna()
+        elif modyfikowane == "MECZ":
+            self.admin_update_mecz()
         else:
             print("wybierz co chcesz modyfkiowac")
 
@@ -604,12 +658,21 @@ class MyGui(QMainWindow):
         uic.loadUi("ui/admin_update_gracz.ui", self)
         self.pushButton.clicked.connect(self.print_gracze_id)
         self.pushButton_2.clicked.connect(self.update_gracz)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
     def update_gracz(self):
         tekst = self.lineEdit.text()
         nowe_imie = self.lineEdit_2.text()
         nowe_nazwisko = self.lineEdit_3.text()
         nowy_rok = self.lineEdit_4.text()
-        database.update_gracz_id(connection, nowe_imie, nowe_nazwisko, nowy_rok, tekst)
+        try:
+            database.update_gracz_id(connection, nowe_imie, nowe_nazwisko, nowy_rok, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+        
     def print_gracze_id(self): # printuje gracza o ID podanym w lineEdit
         tekst = self.lineEdit.text()
         self.textBrowser.clear()
@@ -624,12 +687,21 @@ class MyGui(QMainWindow):
         uic.loadUi("ui/admin_update_sezon.ui", self)
         self.pushButton.clicked.connect(self.print_sezon_id)
         self.pushButton_2.clicked.connect(self.update_sezon)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
     def update_sezon(self):
         tekst = self.lineEdit.text()
         nowe_rok = self.lineEdit_2.text()
         nowe_paczatek = self.lineEdit_3.text()
         nowy_koniec = self.lineEdit_4.text()
-        database.update_sezon_id(connection, nowe_rok, nowe_paczatek, nowy_koniec, tekst)
+        try:
+            database.update_sezon_id(connection, nowe_rok, nowe_paczatek, nowy_koniec, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+        
     def print_sezon_id(self):
         tekst = self.lineEdit.text()
         self.textBrowser.clear()
@@ -640,10 +712,230 @@ class MyGui(QMainWindow):
         except TypeError as err:
             self.textBrowser.append("Podaj istniejące ID_SEZONU")
 
+    # def admin_update_liga(self):
+    #     uic.loadUi("ui/admin_update_liga.ui", self)
+    #     self.pushButton.clicked.connect(self.print_sezon_id)
+    #     self.pushButton_2.clicked.connect(self.update_sezon)
+        ##########################################################################################################33
+    def admin_update_sezon_liga(self):
+        uic.loadUi("ui/admin_update_sezon_liga.ui", self)
+        self.pushButton.clicked.connect(self.print_sezon_liga_id)
+        self.pushButton_2.clicked.connect(self.update_sezon_liga)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_sezon_liga(self):
+        tekst = self.lineEdit.text()
+        id_sezonu = self.lineEdit_2.text()
+        id_ligi = self.lineEdit_3.text()
+        id_szczebla = self.lineEdit_4.text()
+        try:
+            database.update_sezon_liga_id(connection, id_sezonu, id_ligi, id_szczebla, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+    def print_sezon_liga_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_SEZON_LIGA   |    ID_SEZONU    |    ID_LIGI     |    ID_SZCZEBLA\n")
+        sezon = database.select_sezon_liga_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,sezon)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_SEZON_LIGA")
+        ################################################################################3
+    def admin_update_kolejka_rozgrywek(self):
+        uic.loadUi("ui/admin_update_kolejka_rozgrywek.ui", self)
+        self.pushButton.clicked.connect(self.print_kolejka_rozgrywek_id)
+        self.pushButton_2.clicked.connect(self.update_kolejka_rozgrywek)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_kolejka_rozgrywek(self):
+        tekst = self.lineEdit.text()
+        start_kolejki = self.lineEdit_2.text()
+        koniec_kolejki = self.lineEdit_3.text()
+        id_sezon_liga = self.lineEdit_4.text()
+        try:
+            database.update_kolejka_rozgrywek_id(connection, start_kolejki, koniec_kolejki, id_sezon_liga, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+    def print_kolejka_rozgrywek_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_KOLEJKI   |    START KOLEJKI    |    KONIEC KOLEJKI     |    ID_SEZON_LIGA\n")
+        sezon = database.select_kolejka_rozgrywek_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,sezon)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_KOLEJKA_ROZGRYWEK")
+
+    #########################################################################
+    def admin_update_druzyna(self):
+        uic.loadUi("ui/admin_update_druzyna.ui", self)
+        self.pushButton.clicked.connect(self.print_druzyna_id)
+        self.pushButton_2.clicked.connect(self.update_druzyna)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_druzyna(self):
+        tekst = self.lineEdit.text()
+        nazwa_druzyna = self.lineEdit_2.text()
+        try:
+            database.update_druzyna_id(connection, nazwa_druzyna, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+        
+    def print_druzyna_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_DRUZYNY   |    NAZWA DRUZYNY\n")
+        sezon = database.select_druzyna_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,sezon)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_DRUZYNA")
+
+    ###############################################################
+    def admin_update_druzyna_szczebel(self):
+        uic.loadUi("ui/admin_update_druzyna_szczebel.ui", self)
+        self.pushButton.clicked.connect(self.print_druzyna_szczebel_id)
+        self.pushButton_2.clicked.connect(self.update_druzyna_szczebel)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_druzyna_szczebel(self):
+        tekst = self.lineEdit.text()
+        id_sezon_liga = self.lineEdit_2.text()
+        id_druzyny = self.lineEdit_3.text()
+        try:
+            database.update_druzyna_szczebel_id(connection, id_sezon_liga, id_druzyny, tekst)
+            self.label.setText(" ")
+            self.label.adjustSize()
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+    def print_druzyna_szczebel_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_DRUZYNA_SZCZEBEL   |    ID_DRUZYNY    |    ID_SEZON_LIGA\n")
+        
+        sezon = database.select_druzyna_szczebel_id_admin(connection, tekst)
+        
+        try:
+            self.textBrowser.append(" | ".join(map(str,sezon)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_DRUZYNA_SZCZEBEL")
+    ####################################################################################################################
+
     def admin_update_liga(self):
         uic.loadUi("ui/admin_update_liga.ui", self)
-        self.pushButton.clicked.connect(self.print_sezon_id)
-        self.pushButton_2.clicked.connect(self.update_sezon)
+        self.pushButton.clicked.connect(self.print_liga_id)
+        self.pushButton_2.clicked.connect(self.update_liga)
+        self.pushButton_x.clicked.connect(self.loggedasadmin)
+    def update_liga(self):
+        tekst = self.lineEdit.text()
+        nowe_nazwa = self.lineEdit_2.text()
+        try:
+            database.update_liga_id(connection, nowe_nazwa, tekst)
+            self.label_x.setText(" ")
+        except sqlite3.IntegrityError as er:
+            self.label_x.setText("NARUSZONO KLUCZ OBCY")
+            self.label_x.adjustSize()
+            print("naruszono klucz obcy")
+    def print_liga_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_LIGI   |    NAZWA\n")
+        liga = database.select_liga_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,liga)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_LIGI")
+
+    def admin_update_szczebel(self):
+        uic.loadUi("ui/admin_update_szczebel.ui", self)
+        self.pushButton.clicked.connect(self.print_szczebel_id)
+        self.pushButton_2.clicked.connect(self.update_szczebel)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_szczebel(self):
+        tekst = self.lineEdit.text()
+        nowe_nazwa = self.lineEdit_2.text()
+        try:
+            database.update_szczebel_id(connection, nowe_nazwa, tekst)
+            self.label_4.setText(" ")
+        except sqlite3.IntegrityError as er:
+            self.label_4.setText("NARUSZONO KLUCZ OBCY")
+            self.label_4.adjustSize()
+            print("naruszono klucz obcy")
+    def print_szczebel_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_SZCZEBLA   |    NAZWA SZCZEBLA\n")
+        szczebel = database.select_szczebel_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,szczebel)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_SZCZEBLA")
+
+    def admin_update_graczdruzyna(self):
+        uic.loadUi("ui/admin_update_graczdruzyna.ui", self)
+        self.pushButton.clicked.connect(self.print_graczdruzyna_id)
+        self.pushButton_2.clicked.connect(self.update_graczdruzyna)
+        self.pushButton_x.clicked.connect(self.loggedasadmin)
+    def update_graczdruzyna(self):
+        tekst = self.lineEdit.text()
+        nowe_id_gracza = self.lineEdit_2.text()
+        nowe_id_druzyna_szczebel = self.lineEdit_3.text()
+        try:
+            database.update_graczdruzyna_id(connection, nowe_id_gracza, nowe_id_druzyna_szczebel, tekst)
+            self.label_x.setText("")
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucz obcy")
+            self.label_x.setText("NARUSZONO KLUCZ OBCY")
+            self.label_x.adjustSize()
+    def print_graczdruzyna_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_GRACZ_DRUZYNA   |    ID_GRACZA    |     ID_DRUZYNA_SZCZEBEL\n")
+        x = database.select_graczdruzyna_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,x)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_GRACZ_DRUZYNA")
+
+    def admin_update_mecz(self):
+        uic.loadUi("ui/admin_update_mecz.ui", self)
+        self.pushButton.clicked.connect(self.print_mecz_id)
+        self.pushButton_2.clicked.connect(self.update_mecz)
+        self.pushButton_3.clicked.connect(self.loggedasadmin)
+    def update_mecz(self):
+        tekst = self.lineEdit.text()
+        nowe_wynik = self.lineEdit_2.text()
+        nowe_id_druzyna_szczebel1 = self.lineEdit_3.text()
+        nowe_id_druzyna_szczebel2 = self.lineEdit_4.text()
+        try:
+            database.update_mecz_id(connection, nowe_wynik, nowe_id_druzyna_szczebel1, nowe_id_druzyna_szczebel2, tekst)
+            self.label_6.setText(" ")
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucz obcy")
+            self.label_6.setText("NARUSZONO KLUCZ OBCY")
+            self.label_6.adjustSize()
+    def print_mecz_id(self):
+        tekst = self.lineEdit.text()
+        self.textBrowser.clear()
+        self.textBrowser.append("ID_MECZU   |    WYNIK    |     ID_DRUZYNA_SZCZEBEL1    |    ID_DRUZYNA_SZCZEBEL2\n")
+        x = database.select_mecz_id_admin(connection, tekst)
+        try:
+            self.textBrowser.append(" | ".join(map(str,x)))
+        except TypeError as err:
+            self.textBrowser.append("Podaj istniejące ID_MECZU")
+
+    
 
 def main():
     global connection

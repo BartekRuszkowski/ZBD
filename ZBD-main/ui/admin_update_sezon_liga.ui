@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Podaj ID_SEZONU ktory chcesz modyfikowac</string>
+     <string>Podaj ID_SEZON_LIGA ktorą chcesz modyfikowac</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -47,7 +47,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>NOWY ROK SEZONU</string>
+     <string>NOWE ID_SEZONU</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -73,7 +73,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>NOWY POCZATEK SEZONU</string>
+     <string>NOWE ID_LIGI</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
@@ -139,16 +139,16 @@
      </rect>
     </property>
     <property name="text">
-     <string>NOWY KONIEC SEZONU</string>
+     <string>NOWE ID_SZCZEBLA</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>360</y>
-      <width>361</width>
-      <height>41</height>
+      <x>460</x>
+      <y>350</y>
+      <width>241</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -158,20 +158,20 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>180</x>
       <y>20</y>
       <width>361</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>MODYFIIKOWANIE DANYCH SEZON</string>
+     <string>MODYFIIKOWANIE DANYCH SEZON LIGA</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>360</x>
       <y>480</y>
       <width>89</width>
       <height>25</height>
