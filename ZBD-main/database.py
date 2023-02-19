@@ -114,7 +114,7 @@ INSERT_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzy
 
 INSERT_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
 
-INSERT_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?)"
+INSERT_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?);"
 ##
 SELECT_GRACZ = "SELECT * FROM GRACZ;"
 SELECT_SZUKANE_GRACZE = "SELECT * FROM GRACZ WHERE imie = ? OR nazwisko = ? OR rok_urodzenia = ?"
@@ -143,13 +143,13 @@ DELETE_DRUZYNA = "DELETE FROM DRUZYNA WHERE (nazwa_druzyny = ?);"
 
 DELETE_GRACZ = "DELETE FROM GRACZ WHERE (imie = ?) AND (nazwisko = ?) AND (rok_urodzenia = ?);"
 
-DELETE_SEZON_LIGA = "INSERT INTO SEZON_LIGA (id_sezonu, id_ligi, id_szczebla) VALUES (?, ?, ?);"
+DELETE_SEZON_LIGA = "DELETE FROM SEZON_LIGA  WHERE (id_sezonu = ?) AND (id_ligi = ?) AND (id_szczebla = ?);"
 
-DELETE_DRUZYNA_SZCZEBEL = "INSERT INTO DRUZYNA_SZCZEBEL (id_sezon_liga, id_druzyny) VALUES (?, ?);"
+DELETE_DRUZYNA_SZCZEBEL = "DELETE FROM DRUZYNA_SZCZEBEL WHERE (id_sezon_liga = ?) AND (id_druzyny = ?);"
 
-DELETE_MECZ = "INSERT INTO MECZ (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2) VALUES (?, ?, ?);"
+DELETE_MECZ = "DELETE FROM MECZ WHERE (wynik = ?) AND (id_druzyna_szczebel_1 = ?) AND (id_druzyna_szczebel_2 = ?);"
 
-DELETE_GRACZ_DRUZYNA = "INSERT INTO GRACZ_DRUZYNA (id_gracza) VALUES (?)"
+DELETE_GRACZ_DRUZYNA = "DELETE FROM GRACZ_DRUZYNA  WHERE (id_gracza = ?);"
 
 
 lista_tabel = [CREATE_GRACZ, CREATE_GRACZ_DRUZYNA, CREATE_TABLE_LIGA, CREATE_TABLE_szczebel, CREATE_TABLE_SEZON_LIGA, KOLEJKA_ROZGRYWEK, CREATE_DRUZYNA, CREATE_DRUZYNA_SZCZEBEL, CREATE_TABLE_SEZON, CREATE_SUGESTIE, CREATE_MECZ]
@@ -291,3 +291,21 @@ def insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
 def insert_gracz_druzyna(connection, id_gracza):
     with connection:
         connection.execute(INSERT_GRACZ_DRUZYNA, (id_gracza,))
+
+########################################################################33
+
+def delete_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla):
+    with connection:
+        connection.execute(DELETE_SEZON_LIGA, (id_sezonu, id_ligi, id_szczebla))
+
+def delete_druzyna_szczebel(connection, id_sezon_liga, id_druzyny):
+    with connection:
+        connection.execute(DELETE_DRUZYNA_SZCZEBEL, (id_sezon_liga, id_druzyny))
+
+def delete_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2):
+    with connection:
+        connection.execute(DELETE_MECZ, (wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2))
+
+def delete_gracz_druzyna(connection, id_gracza):
+    with connection:
+        connection.execute(DELETE_GRACZ_DRUZYNA, (id_gracza,))

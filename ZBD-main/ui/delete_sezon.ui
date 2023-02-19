@@ -17,14 +17,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>66</x>
-      <y>40</y>
+      <x>360</x>
+      <y>150</y>
       <width>191</width>
       <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>USUWANIE SEZONU</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -120,6 +120,19 @@
     </property>
     <property name="text">
      <string>EXIT</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>50</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>USUWANIE SEZONU</string>
     </property>
    </widget>
   </widget>

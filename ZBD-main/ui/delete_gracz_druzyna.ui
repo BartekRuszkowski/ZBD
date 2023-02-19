@@ -17,10 +17,10 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>110</y>
-      <width>171</width>
-      <height>17</height>
+      <x>260</x>
+      <y>150</y>
+      <width>111</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -30,21 +30,34 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>110</y>
-      <width>111</width>
-      <height>17</height>
+      <x>60</x>
+      <y>40</y>
+      <width>211</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>Nazwa szczebla</string>
+     <string>USUWANIE GRACZ_DRUZYNA</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>16</x>
+      <y>156</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID_GRACZA</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>100</y>
+      <x>110</x>
+      <y>150</y>
       <width>113</width>
       <height>25</height>
      </rect>
@@ -53,8 +66,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>100</y>
+      <x>220</x>
+      <y>220</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -67,26 +80,13 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>290</y>
+      <y>370</y>
       <width>89</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>EXIT</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>171</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>USUWANIE SZCZEBLA</string>
+     <string>BACK</string>
     </property>
    </widget>
   </widget>

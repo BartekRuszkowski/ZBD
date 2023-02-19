@@ -500,7 +500,12 @@ class MyGui(QMainWindow):
         imie = self.lineEdit.text()
         nazwisko = self.lineEdit_2.text()
         rok_urodzenia = int(self.lineEdit_3.text())
-        database.delete_gracz(connection, imie, nazwisko, rok_urodzenia)
+        try:
+            database.delete_gracz(connection, imie, nazwisko, rok_urodzenia)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
         
     def delete_sezon(self):
         uic.loadUi("ui/delete_sezon.ui", self)
@@ -511,7 +516,12 @@ class MyGui(QMainWindow):
         rok = int(self.lineEdit.text())
         poczatek_sezonu = self.lineEdit_2.text()
         koniec_sezonu = self.lineEdit_3.text()
-        database.delete_sezon(connection, rok, poczatek_sezonu, koniec_sezonu)
+        try:
+            database.delete_sezon(connection, rok, poczatek_sezonu, koniec_sezonu)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
 
     def delete_liga(self):
         uic.loadUi("ui/delete_liga.ui", self)
@@ -520,7 +530,13 @@ class MyGui(QMainWindow):
         
     def delete_liga_add(self):    
         nazwa = self.lineEdit.text()
-        database.delete_liga(connection, nazwa)
+        try:
+            database.delete_liga(connection, nazwa)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
+
 
     def delete_szczebel(self):
         uic.loadUi("ui/delete_szczebel.ui", self)
@@ -529,7 +545,13 @@ class MyGui(QMainWindow):
         
     def delete_szczebel_add(self):    
         nazwa_szczebla = self.lineEdit.text()
-        database.delete_szczebel(connection, nazwa_szczebla)
+        
+        try:
+            database.delete_szczebel(connection, nazwa_szczebla)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
 
     def delete_kolejka_rozgrywek(self):
         uic.loadUi("ui/delete_kolejka_rozgrywek.ui", self)
@@ -540,7 +562,12 @@ class MyGui(QMainWindow):
         start_kolejki = self.lineEdit.text()
         koniec_kolejki = self.lineEdit_2.text()
         id_sezon_liga = int(self.lineEdit_3.text())
-        database.delete_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
+        try:
+            database.delete_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
         
     
     def delete_druzyna(self):
@@ -550,7 +577,12 @@ class MyGui(QMainWindow):
         
     def delete_druzyna_add(self):    
         nazwa_druzyna = self.lineEdit.text()
-        database.delete_druzyna(connection, nazwa_druzyna)
+        try:
+            database.delete_druzyna(connection, nazwa_druzyna)
+        except sqlite3.IntegrityError as er:
+            print("naruszono klucze !!!!!!")
+            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.adjustSize()
 
 def main():
     global connection

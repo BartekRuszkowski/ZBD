@@ -17,14 +17,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>40</y>
+      <x>360</x>
+      <y>140</y>
       <width>181</width>
       <height>22</height>
      </rect>
     </property>
     <property name="text">
-     <string>USUWANIE GRACZA</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -120,6 +120,19 @@
     </property>
     <property name="text">
      <string>EXIT</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>30</y>
+      <width>181</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>USUWANIE GRACZA</string>
     </property>
    </widget>
   </widget>
