@@ -564,7 +564,7 @@ class MyGui(QMainWindow):
             self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że id_gracz o wprowadzanych \n przez ciebie danych: imie, nazwisko, rok_urodzenia nie są wykorzystywane przez inną tabele!")
             self.label.adjustSize()
         
     def delete_sezon(self):
@@ -582,7 +582,7 @@ class MyGui(QMainWindow):
             self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że id_sezonu o wprowadzanych \n przez ciebie danych: rok, poczatek_sezonu, koniec_sezonu nie są wykorzystywane przez inną tabele!")
             self.label.adjustSize()
 
     def delete_liga(self):
@@ -598,7 +598,7 @@ class MyGui(QMainWindow):
             self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że id_ligi o wprowadzanych \n przez ciebie danych: nazwa nie są wykorzystywane przez inną tabele!")
             self.label.adjustSize()
 
 
@@ -616,7 +616,7 @@ class MyGui(QMainWindow):
             self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że id_szczebla o wprowadzanych \n przez ciebie danych: nazwa_szczebla nie są wykorzystywane przez inną tabele!")
             self.label.adjustSize()
 
     def delete_kolejka_rozgrywek(self):
@@ -651,7 +651,7 @@ class MyGui(QMainWindow):
             self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("NARUSZONO KLUCZE!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że id_druzyny o wprowadzanych \n przez ciebie danych: nazwa_druzyny nie są wykorzystywane przez inną tabele!")
             self.label.adjustSize()
 
 
@@ -780,7 +780,7 @@ class MyGui(QMainWindow):
                 self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezonu, id_ligi, id_szczebla nie są wykorzystywane przez inną tabele!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezonu, id_ligi, id_szczebla istnieją!")
             self.label.adjustSize()
     def print_sezon_liga_id(self):
         tekst = self.lineEdit.text()
@@ -814,7 +814,7 @@ class MyGui(QMainWindow):
                 self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga nie są wykorzystywane przez inną tabele!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga istnieją!")
             self.label.adjustSize()
     def print_kolejka_rozgrywek_id(self):
         tekst = self.lineEdit.text()
@@ -876,7 +876,7 @@ class MyGui(QMainWindow):
                 self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
-            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga, id_druzyny nie są wykorzystywane przez inną tabele!")
+            self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga, id_druzyny istnieją!")
             self.label.adjustSize()
     def print_druzyna_szczebel_id(self):
         tekst = self.lineEdit.text()
@@ -972,7 +972,7 @@ class MyGui(QMainWindow):
         try:
             self.textBrowser.append(" | ".join(map(str,x)))
         except TypeError as err:
-            self.textBrowser.append("Naruszono klucz obcy! Upewnij się, że wprowadzanie przez ciebie dane: id_gracza, id_druzyna_szczebel nie są wykorzystywane przez inną tabele!")
+            self.textBrowser.append("Naruszono klucz obcy! Upewnij się, że wprowadzanie przez ciebie dane: id_gracza, id_druzyna_szczebel istnieją!")
 
     def admin_update_mecz(self):
         uic.loadUi("ui/admin_update_mecz.ui", self)
@@ -996,7 +996,7 @@ class MyGui(QMainWindow):
                 self.label_6.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucz obcy")
-            self.label_6.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_druzyna_szczebel_1, id_druzyna_szczebel_2 nie są wykorzystywane przez inną tabele!")
+            self.label_6.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_druzyna_szczebel_1, id_druzyna_szczebel_2 istnieją!")
             self.label_6.adjustSize()
     def print_mecz_id(self):
         tekst = self.lineEdit.text()
