@@ -3,6 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import *
 import database
 import os
+import re
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 
@@ -107,10 +108,15 @@ class MyGui(QMainWindow):
         id_sezonu = self.lineEdit.text()
         id_ligi = self.lineEdit_2.text()
         id_szczebla = self.lineEdit_3.text()
+        self.label.setText(" ")
         try:
-            database.insert_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezonu.isnumeric() and id_ligi.isnumeric() and id_szczebla.isnumeric():
+                database.insert_sezon_liga(connection, id_sezonu, id_ligi, id_szczebla)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że id_sezonu, _id_ligi oraz id_szczebla to wartości liczbowe całkowite")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezonu, id_ligi, id_szczebla istnieją!")
@@ -123,10 +129,15 @@ class MyGui(QMainWindow):
     def insert_druzyna_szczebel_add(self):
         id_sezon_liga = self.lineEdit.text()
         id_druzyny = self.lineEdit_2.text()
+        self.label.setText(" ")
         try:
-            database.insert_druzyna_szczebel(connection, id_sezon_liga, id_druzyny)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezon_liga.isnumeric() and id_druzyny.isnumeric():
+                database.insert_druzyna_szczebel(connection, id_sezon_liga, id_druzyny)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że id_sezon_liga oraz id_drużyny to wartości liczbowe całkowite")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga, id_druzyny istnieją!")
@@ -139,10 +150,16 @@ class MyGui(QMainWindow):
     def insert_gracz_druzyna_add(self):
         id_gracza = self.lineEdit.text()
         id_druzyna_szczebel = self.lineEdit_2.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.insert_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_gracza.isnumeric() and id_druzyna_szczebel.isnumeric():
+                database.insert_gracz_druzyna(connection, id_gracza, id_druzyna_szczebel)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że id_gracza oraz id_druzyna_szczebel to wartości liczbowe całkowite")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_gracza, id_druzyna_szczebel istnieją!")
@@ -155,12 +172,18 @@ class MyGui(QMainWindow):
         self.pushButton_2.clicked.connect(self.admin_insert)
     def insert_mecz_add(self):
         wynik = self.lineEdit.text()
-        id_druzyna_szczebel_1 = self.lineEdit.text()
-        id_druzyna_szczebel_2 = self.lineEdit.text()
+        id_druzyna_szczebel_1 = self.lineEdit_2.text()
+        id_druzyna_szczebel_2 = self.lineEdit_3.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_druzyna_szczebel_1.isnumeric() and id_druzyna_szczebel_2.isnumeric() and (id_druzyna_szczebel_1 != id_druzyna_szczebel_2) and (re.match('^\d:\d', wynik)):
+                database.insert_mecz(connection, wynik, id_druzyna_szczebel_1, id_druzyna_szczebel_2)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                 self.label.setText("Upewnij się że wprowadzone id obu drużyn to różniące się liczbowe wartości całkowite\n a wynik zapisany jest w formacie gole_1:gole_2")
+                 self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_druzyna_szczebel_1, id_druzyna_szczebel_2 istnieją!")
@@ -248,11 +271,17 @@ class MyGui(QMainWindow):
     def insert_kolejka_add(self):    
         start_kolejki = self.lineEdit.text()
         koniec_kolejki = self.lineEdit_2.text()
-        id_sezon_liga = int(self.lineEdit_3.text())
+        id_sezon_liga = self.lineEdit_3.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.add_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezon_liga.isnumeric():
+                database.add_kolejka_rozgrywek(connection, start_kolejki, koniec_kolejki, id_sezon_liga)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że wprowadzone id_sezon_liga jest całkowitą wartością liczbową")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga istnieją")
@@ -664,10 +693,16 @@ class MyGui(QMainWindow):
         nowe_imie = self.lineEdit_2.text()
         nowe_nazwisko = self.lineEdit_3.text()
         nowy_rok = self.lineEdit_4.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.update_gracz_id(connection, nowe_imie, nowe_nazwisko, nowy_rok, tekst)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if nowy_rok.isnumeric():
+                database.update_gracz_id(connection, nowe_imie, nowe_nazwisko, nowy_rok, tekst)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że wprowadzony rok jest liczbą całkowitą np. 1999")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -693,10 +728,16 @@ class MyGui(QMainWindow):
         nowe_rok = self.lineEdit_2.text()
         nowe_paczatek = self.lineEdit_3.text()
         nowy_koniec = self.lineEdit_4.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.update_sezon_id(connection, nowe_rok, nowe_paczatek, nowy_koniec, tekst)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if nowe_rok.isnumeric():
+                database.update_sezon_id(connection, nowe_rok, nowe_paczatek, nowy_koniec, tekst)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że rok się całkowitą liczbą np. 1999")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("NARUSZONO KLUCZE!")
@@ -727,10 +768,16 @@ class MyGui(QMainWindow):
         id_sezonu = self.lineEdit_2.text()
         id_ligi = self.lineEdit_3.text()
         id_szczebla = self.lineEdit_4.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.update_sezon_liga_id(connection, id_sezonu, id_ligi, id_szczebla, tekst)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezonu.isnumeric() and id_ligi.isnumeric() and id_szczebla.isnumeric():
+                database.update_sezon_liga_id(connection, id_sezonu, id_ligi, id_szczebla, tekst)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że id_sezonu ligi oraz szczeble to wartości liczbowe całkowite")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezonu, id_ligi, id_szczebla nie są wykorzystywane przez inną tabele!")
@@ -755,10 +802,16 @@ class MyGui(QMainWindow):
         start_kolejki = self.lineEdit_2.text()
         koniec_kolejki = self.lineEdit_3.text()
         id_sezon_liga = self.lineEdit_4.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.update_kolejka_rozgrywek_id(connection, start_kolejki, koniec_kolejki, id_sezon_liga, tekst)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezon_liga.isnumeric():
+                database.update_kolejka_rozgrywek_id(connection, start_kolejki, koniec_kolejki, id_sezon_liga, tekst)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że id_sezon_liga jest calkowita liczba")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga nie są wykorzystywane przez inną tabele!")
@@ -811,10 +864,16 @@ class MyGui(QMainWindow):
         tekst = self.lineEdit.text()
         id_sezon_liga = self.lineEdit_2.text()
         id_druzyny = self.lineEdit_3.text()
+        self.label.setText(" ")
+        self.label.adjustSize()
         try:
-            database.update_druzyna_szczebel_id(connection, id_sezon_liga, id_druzyny, tekst)
-            self.label.setText(" ")
-            self.label.adjustSize()
+            if id_sezon_liga.isnumeric() and id_druzyny.isnumeric():
+                database.update_druzyna_szczebel_id(connection, id_sezon_liga, id_druzyny, tekst)
+                self.label.setText(" ")
+                self.label.adjustSize()
+            else:
+                self.label.setText("Upewnij się że podane id_sezon_liga oraz id_druzyny to liczby calkowite")
+                self.label.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucze !!!!!!")
             self.label.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_sezon_liga, id_druzyny nie są wykorzystywane przez inną tabele!")
@@ -891,9 +950,16 @@ class MyGui(QMainWindow):
         tekst = self.lineEdit.text()
         nowe_id_gracza = self.lineEdit_2.text()
         nowe_id_druzyna_szczebel = self.lineEdit_3.text()
+        self.label_x.setText(" ")
+        self.label_x.adjustSize()
         try:
-            database.update_graczdruzyna_id(connection, nowe_id_gracza, nowe_id_druzyna_szczebel, tekst)
-            self.label_x.setText("")
+            if nowe_id_gracza.isnumeric() and nowe_id_druzyna_szczebel.isnumeric():
+                database.update_graczdruzyna_id(connection, nowe_id_gracza, nowe_id_druzyna_szczebel, tekst)
+                self.label_x.setText(" ")
+                self.label_x.adjustSize()
+            else:
+                self.label_x.setText("Upewnij się że podane id_gracza oraz id_gracz_druzyna to liczby całkowite")
+                self.label_x.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucz obcy")
             self.label_x.setText("NARUSZONO KLUCZ OBCY")
@@ -918,9 +984,16 @@ class MyGui(QMainWindow):
         nowe_wynik = self.lineEdit_2.text()
         nowe_id_druzyna_szczebel1 = self.lineEdit_3.text()
         nowe_id_druzyna_szczebel2 = self.lineEdit_4.text()
+        self.label_6.setText(" ")
+        self.label_6.adjustSize()
         try:
-            database.update_mecz_id(connection, nowe_wynik, nowe_id_druzyna_szczebel1, nowe_id_druzyna_szczebel2, tekst)
-            self.label_6.setText(" ")
+            if nowe_id_druzyna_szczebel1.isnumeric() and nowe_id_druzyna_szczebel2.isnumeric() and (re.match('^\d:\d', nowe_wynik)):
+                database.update_mecz_id(connection, nowe_wynik, nowe_id_druzyna_szczebel1, nowe_id_druzyna_szczebel2, tekst)
+                self.label_6.setText(" ")
+                self.label_6.adjustSize()
+            else:
+                self.label_6.setText("Upewnij się że id_druzyn są liczbami oraz wynik jest w formacie gol_1:gol_2")
+                self.label_6.adjustSize()
         except sqlite3.IntegrityError as er:
             print("naruszono klucz obcy")
             self.label_6.setText("Naruszono klucz obcy! Upewnij się że wprowadzane \n przez ciebie dane: id_druzyna_szczebel_1, id_druzyna_szczebel_2 nie są wykorzystywane przez inną tabele!")
